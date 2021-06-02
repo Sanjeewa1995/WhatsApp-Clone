@@ -10,11 +10,10 @@ abstract class LocalDataSource {
 class LocalDataSourceImpl extends LocalDataSource {
   @override
   Future<Iterable<Contact>> getContactList() async {
-    Iterable<Contact> contacts;
+    Iterable<Contact> contacts =[];
     if (await Permission.contacts.request().isGranted) {
       contacts = await ContactsService.getContacts();
     }
-
     return contacts;
   }
 }

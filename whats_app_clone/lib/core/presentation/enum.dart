@@ -1,0 +1,1 @@
+enum ScreenSize { SMALL, MEDIUM, LARGE }

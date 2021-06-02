@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:whats_app_clone/core/const.dart';
 
 class VerifyPNScreen extends StatefulWidget {
-  const VerifyPNScreen({Key key}) : super(key: key);
+  const VerifyPNScreen() : super();
 
   @override
   _VerifyPNScreenState createState() => _VerifyPNScreenState();
@@ -67,7 +67,7 @@ class _VerifyPNScreenState extends State<VerifyPNScreen> {
                           }
                         }
                         setState(() {
-                          _category = newValue;
+                          _category = newValue.toString();
                         });
                       },
                       value: _category,
@@ -127,7 +127,7 @@ class _VerifyPNScreenState extends State<VerifyPNScreen> {
             ElevatedButton(
                 style: ButtonStyle(
                     backgroundColor: MaterialStateProperty.all<Color>(
-                        Theme.of(context).accentColor)),
+                        Theme.of(context).colorScheme.secondary)),
                 child: Padding(
                   padding:
                       const EdgeInsets.symmetric(horizontal: 10, vertical: 8),

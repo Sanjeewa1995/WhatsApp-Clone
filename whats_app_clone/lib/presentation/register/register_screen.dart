@@ -1,11 +1,9 @@
 import 'package:firebase_auth/firebase_auth.dart';
-import 'package:firebase_auth_ui/providers.dart';
 import 'package:flutter/material.dart';
-import 'package:firebase_auth_ui/firebase_auth_ui.dart';
 import 'package:sms_autofill/sms_autofill.dart';
 
 class RegisterScreen extends StatefulWidget {
-  RegisterScreen({Key key}) : super(key: key);
+  RegisterScreen() : super();
 
   @override
   _RegisterScreenState createState() => _RegisterScreenState();
@@ -19,11 +17,11 @@ class _RegisterScreenState extends State<RegisterScreen> {
 
   final _scaffoldKey = GlobalKey<ScaffoldState>();
 
-  String _verificationId;
+  late String _verificationId;
   final SmsAutoFill _autoFill = SmsAutoFill();
 
   void showSnackbar(String message) {
-    _scaffoldKey.currentState.showSnackBar(SnackBar(content: Text(message)));
+    ScaffoldMessenger.of(context).showSnackBar(SnackBar(content: Text(message)));
   }
 
   @override
@@ -32,7 +30,7 @@ class _RegisterScreenState extends State<RegisterScreen> {
         (PhoneAuthCredential phoneAuthCredential) async {
       await _auth.signInWithCredential(phoneAuthCredential);
       showSnackbar(
-          "Phone number automatically verified and user signed in: ${_auth.currentUser.uid}");
+          "Phone number automatically verified and user signed in: ${_auth.currentUser!.uid}");
     };
 
     PhoneVerificationFailed verificationFailed =
@@ -42,7 +40,7 @@ class _RegisterScreenState extends State<RegisterScreen> {
     };
 
     PhoneCodeSent codeSent =
-        (String verificationId, [int forceResendingToken]) async {
+        (String verificationId, [  int? forceResendingToken]) async {
       showSnackbar('Please check your phone for the verification code.');
       _verificationId = verificationId;
     };
@@ -63,7 +61,7 @@ class _RegisterScreenState extends State<RegisterScreen> {
             codeSent: codeSent,
             codeAutoRetrievalTimeout: codeAutoRetrievalTimeout);
       } catch (e) {
-        showSnackbar("Failed to Verify Phone Number: ${e}");
+        showSnackbar("Failed to Verify Phone Number: $e");
       }
     }
 
@@ -74,7 +72,7 @@ class _RegisterScreenState extends State<RegisterScreen> {
           smsCode: _smsController.text,
         );
 
-        final User user = (await _auth.signInWithCredential(credential)).user;
+        final User user = (await _auth.signInWithCredential(credential)).user!;
 
         showSnackbar("Successfully signed in UID: ${user.uid}");
       } catch (e) {
@@ -97,7 +95,7 @@ class _RegisterScreenState extends State<RegisterScreen> {
               child: ElevatedButton(
                 onPressed: () async {
                   setState(() async {
-                    _phoneNumberController.text = await _autoFill.hint;
+                    _phoneNumberController.text = (await _autoFill.hint)!;
                   });
 
                   // FirebaseAuthUi.instance()

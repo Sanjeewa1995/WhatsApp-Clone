@@ -1,11 +1,11 @@
-import 'package:contacts_service/contacts_service.dart';
+
 import 'package:equatable/equatable.dart';
-import 'package:flutter/widgets.dart';
+import 'package:whats_app_clone/core/model/contact_model.dart';
 
 class ContactListResponse extends Equatable {
-  final List<Contact> allContactList;
+  final List<ContactModel> allContactList;
 
-  ContactListResponse({@required this.allContactList});
+  ContactListResponse({required this.allContactList});
 
   @override
   List<Object> get props => [allContactList];

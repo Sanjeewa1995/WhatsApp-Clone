@@ -1,9 +1,11 @@
 import 'package:flutter/material.dart';
+// ignore: import_of_legacy_library_into_null_safe
 import 'package:story_view/controller/story_controller.dart';
-import 'package:story_view/story_view.dart';
+// ignore: import_of_legacy_library_into_null_safe
+import 'package:story_view/widgets/story_view.dart';
 
 class StatusViewScreen extends StatefulWidget {
-  StatusViewScreen({Key key}) : super(key: key);
+  StatusViewScreen() : super();
 
   @override
   _StatusViewScreenState createState() => _StatusViewScreenState();

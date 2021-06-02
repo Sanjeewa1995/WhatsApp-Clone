@@ -13,7 +13,9 @@ class SelectContactListRepoImpl extends SelectContactRepo {
   @override
   Future<ContactListResponse> getContactList() async {
     Iterable<Contact> contactData = await localDataSource.getContactList();
-    ContactListResponse response = ContactListResponseModel.toList(contactData);
+
+    ContactListResponse response = ContactListResponse(
+        allContactList: ContactListModel.toContactList(contactData.toList()));
     return response;
   }
 }
