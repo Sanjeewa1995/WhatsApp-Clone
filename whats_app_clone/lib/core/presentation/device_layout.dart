@@ -31,6 +31,19 @@ double getBlockSizeVertical(BuildContext context) {
   return blockSizeVertical;
 }
 
+double getBlockSizeHorizontal(BuildContext context) {
+  MediaQueryData mediaQueryData = MediaQuery.of(context);
+  var orientation = mediaQueryData.orientation;
+  double deviceWidth = 0;
+  if (orientation == Orientation.landscape) {
+    deviceWidth = mediaQueryData.size.width;
+  } else {
+    deviceWidth = mediaQueryData.size.width;
+  }
+  double blockSizeHorizontal = deviceWidth / 100;
+  return blockSizeHorizontal;
+}
+
 double getDeviceWiseHeight(
     {required ScreenSize screenSize,
     required BuildContext context,
